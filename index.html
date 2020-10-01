@@ -10,9 +10,9 @@
 <body>
     <script>
         let choices = ["rock", "paper", "scissors"];
+        let drawCount = 0;
         // Game activation
         game();
-
 
         // Game function, plays five rounds and determines overall winner
         function game() {
@@ -24,11 +24,15 @@
                 if (game) {
                     winCounter += 1;
                 }
+                console.log(`The score is Player: ${winCounter} and Computer: ${i + 1 - winCounter}.
+                There have been ${drawCount} draws so far. It is currently round ${i + 1}`)
             }
             if (winCounter > (maxGames / 2)) {
-                console.log("You won the game!");
+                console.log(`You won the game! Final score was Player: ${winCounter} 
+                and Computer: ${i + 1 - winCounter}`);
             } else {
-                console.log("You lost the game!");
+                console.log(`You lost the game! Final score was Player: ${winCounter} 
+                and Computer: ${i + 1 - winCounter}`);
             }
         }
 
@@ -73,11 +77,13 @@
                 return false;
             } else if (playerSelection == computerSelection) {
                 console.log("Draw! Repeat the round.");
+                drawCount += 1;
                 // If draw, get new player selection and computer selection, and repeat
                 let newPlayerSelection = getPlayerSelection();
                 let newComputerSelection = computerPlay();
                 return RockPaperScissors(newPlayerSelection, newComputerSelection);
             }
+        }
     </script>
 </body>
 
