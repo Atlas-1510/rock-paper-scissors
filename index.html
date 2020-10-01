@@ -10,13 +10,36 @@
 <body>
     <script>
         let choices = ["rock", "paper", "scissors"];
+        // Game activation
+        game();
 
+
+        // Game function, plays five rounds and determines overall winner
+        function game() {
+            let winCounter = 0;
+            let maxGames = 5;
+            let i;
+            for (i = 0; i < maxGames; i++) {
+                let game = RockPaperScissors();
+                if (game) {
+                    winCounter += 1;
+                }
+            }
+            if (winCounter > (maxGames / 2)) {
+                console.log("You won the game!");
+            } else {
+                console.log("You lost the game!");
+            }
+        }
+
+        // Gets computer choice for each round
         function computerPlay() {
             let randomNumber = Math.floor(Math.random() * 3);
             let computerChoice = choices[randomNumber];
             return computerChoice;
         }
 
+        // Gets player choice for each round
         function getPlayerSelection() {
             let playerSelection = prompt("Please choose 'rock', 'paper', or 'scissors': ")
             playerSelection = playerSelection.toLowerCase();
@@ -27,11 +50,34 @@
             }
         }
 
-
-
+        // Determines winner of each round. Return true if player won, returns false if computer won.
+        // If draw, repeats round until winner determined.
         function RockPaperScissors(playerSelection, computerSelection) {
-
-        }
+            if (playerSelection == "rock" && computerSelection == "scissors") {
+                console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+                return true;
+            } else if (playerSelection == "rock" && computerSelection == "paper") {
+                console.log(`You lose! ${playerSelection} loses to ${computerSelection}`);
+                return false;
+            } else if (playerSelection == "paper" && computerSelection == "rock") {
+                console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+                return true;
+            } else if (playerSelection == "paper" && computerSelection == "scissors") {
+                console.log(`You lose! ${playerSelection} loses to ${computerSelection}`);
+                return false;
+            } else if (playerSelection == "scissors" && computerSelection == "paper") {
+                console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+                return true;
+            } else if (playerSelection == "scissors" && computerSelection == "rock") {
+                console.log(`You lose! ${playerSelection} loses to ${computerSelection}`);
+                return false;
+            } else if (playerSelection == computerSelection) {
+                console.log("Draw! Repeat the round.");
+                // If draw, get new player selection and computer selection, and repeat
+                let newPlayerSelection = getPlayerSelection();
+                let newComputerSelection = computerPlay();
+                return RockPaperScissors(newPlayerSelection, newComputerSelection);
+            }
     </script>
 </body>
 
