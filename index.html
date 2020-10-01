@@ -9,11 +9,28 @@
 
 <body>
     <script>
+        let choices = ["rock", "paper", "scissors"];
+
         function computerPlay() {
-            let choices = ["rock", "paper", "scissors"];
             let randomNumber = Math.floor(Math.random() * 3);
             let computerChoice = choices[randomNumber];
             return computerChoice;
+        }
+
+        function getPlayerSelection() {
+            let playerSelection = prompt("Please choose 'rock', 'paper', or 'scissors': ")
+            playerSelection = playerSelection.toLowerCase();
+            if (choices.includes(playerSelection)) {
+                return playerSelection;
+            } else {
+                getPlayerSelection();
+            }
+        }
+
+
+
+        function RockPaperScissors(playerSelection, computerSelection) {
+
         }
     </script>
 </body>
